@@ -1,5 +1,4 @@
-const Ajv = require('ajv')
-const ajv = new Ajv()
+const { validate } = require("../utils/schemaValidator")
 
 const withTestsSchema = {
     type: 'object',
@@ -40,9 +39,18 @@ const withTestsSchema = {
                                     {type: 'array'},
                                     {type: 'object'},
                                 ]
+                            },
+                            expectedResult: {
+                                oneOf: [
+                                    {type: 'number'},
+                                    {type: 'string'},
+                                    {type: 'boolean'},
+                                    {type: 'array'},
+                                    {type: 'object'},
+                                ]
                             }
                         },
-                        required: ["testCaseId", "testData"]
+                        required: ["testCaseId", "testData", "expectedResult"]
                     }
                 }
             }
@@ -51,10 +59,7 @@ const withTestsSchema = {
     required: ["code", "language", "tests", "testsType"]
 }
 
-const validateWithTests = (data) => {
-    const validate = ajv.compile(withTestsSchema)
-    return validate(data)
-}
+const validateWithTests = (data) => validate(withTestsSchema, data)
 
 module.exports = {
     validateWithTests
