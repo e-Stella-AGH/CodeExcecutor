@@ -46,4 +46,19 @@ describe("Code executor should work properly", () => {
         expect(result.err).toBeTruthy()
     })
 
+    it("should execute more complicated code", async () => {
+        const data = {
+            language: 'python',
+            code: "x = input()\n" +
+                "print(x**2)",
+            input: 2,
+            expectedResult: "4"
+        }
+
+        const result = await codeExecutor.execute(data)
+
+        expect(result.passed).toBe(true)
+        expect(result.err).toBeFalsy()
+    })
+
 })

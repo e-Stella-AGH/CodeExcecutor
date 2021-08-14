@@ -41,13 +41,7 @@ const withTestsSchema = {
                                 ]
                             },
                             expectedResult: {
-                                oneOf: [
-                                    {type: 'number'},
-                                    {type: 'string'},
-                                    {type: 'boolean'},
-                                    {type: 'array'},
-                                    {type: 'object'},
-                                ]
+                                type: 'string'
                             }
                         },
                         required: ["testCaseId", "testData", "expectedResult"]

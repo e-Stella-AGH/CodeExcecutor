@@ -5,7 +5,13 @@ const codeSchema = {
     properties: {
         language: { type: 'string' },
         code: { type: 'string' },
-        input: { type: 'string' },
+        input: { oneOf: [
+                {type: 'number'},
+                {type: 'string'},
+                {type: 'boolean'},
+                {type: 'array'},
+                {type: 'object'},
+            ] },
         expectedResult: { type: 'string' }
     },
     required: ["language", "code", "input"]

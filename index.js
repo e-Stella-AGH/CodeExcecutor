@@ -22,3 +22,5 @@ app.post('/with_tests', (req, res) => {
 app.listen(port, () => {
     console.log(`App ready on port ${port}!`)
 })
+
+module.exports = app

@@ -22,7 +22,13 @@ const executeFromTests = async (data) => {
             code: data.code,
             input: test.testData,
             expectedResult: test.expectedResult
-        }).catch(err => err)
+        }).then(result => {
+            return {
+                ...result,
+                testCaseId: test.testCaseId
+            }
+        })
+            .catch(err => err)
     }))
 }
 

@@ -6,7 +6,7 @@ describe("should properly validate schemas", () => {
         const data = {
             code: "sample code",
             language: "python",
-            tests: [{testCaseId: 1, testData: 1, expectedResult: 1}],
+            tests: [{testCaseId: 1, testData: 1, expectedResult: "1"}],
             testsType: "testCases"
         }
         expect(validateWithTests(data)).toBe(true)
@@ -16,7 +16,7 @@ describe("should properly validate schemas", () => {
         const data = {
             code: "sample code",
             language: "python",
-            tests: [{testCaseId: 1, testData: [1, 2, 3], expectedResult: 1}],
+            tests: [{testCaseId: 1, testData: [1, 2, 3], expectedResult: "1"}],
             testsType: "testCases"
         }
         expect(validateWithTests(data)).toBe(true)
@@ -26,7 +26,7 @@ describe("should properly validate schemas", () => {
         const data = {
             code: "sample code",
             language: "python",
-            tests: [{testCaseId: 1, testData: {"foo": "bar"}, expectedResult: 1}],
+            tests: [{testCaseId: 1, testData: {"foo": "bar"}, expectedResult: "1"}],
             testsType: "testCases"
         }
         expect(validateWithTests(data)).toBe(true)
@@ -35,7 +35,7 @@ describe("should properly validate schemas", () => {
     it("should not validate schema without code", () => {
         const data = {
             language: "python",
-            tests: [{testCaseId: 1, testData: {"foo": "bar"}, expectedResult: 1}],
+            tests: [{testCaseId: 1, testData: {"foo": "bar"}, expectedResult: "1"}],
             testsType: "testCases"
         }
         expect(validateWithTests(data)).toBe(false)
@@ -44,7 +44,7 @@ describe("should properly validate schemas", () => {
     it("should not validate schema without language", () => {
         const data = {
             code: "sample code",
-            tests: [{testCaseId: 1, testData: {"foo": "bar"}, expectedResult: 1}],
+            tests: [{testCaseId: 1, testData: {"foo": "bar"}, expectedResult: "1"}],
             testsType: "testCases"
         }
         expect(validateWithTests(data)).toBe(false)
@@ -63,7 +63,7 @@ describe("should properly validate schemas", () => {
         const data = {
             code: "sample code",
             language: "python",
-            tests: [{testCaseId: 1, testData: {"foo": "bar"}, expectedResult: 1}]
+            tests: [{testCaseId: 1, testData: {"foo": "bar"}, expectedResult: "1"}]
         }
         expect(validateWithTests(data)).toBe(false)
     })
@@ -72,7 +72,7 @@ describe("should properly validate schemas", () => {
         const data = {
             code: "sample code",
             language: "python",
-            tests: [{testData: {"foo": "bar"}, expectedResult: 1}],
+            tests: [{testData: {"foo": "bar"}, expectedResult: "1"}],
             testsType: "testCases"
         }
         expect(validateWithTests(data)).toBe(false)
@@ -82,7 +82,7 @@ describe("should properly validate schemas", () => {
         const data = {
             code: "sample code",
             language: "python",
-            tests: [{testCaseId: 1, expectedResult: 1}],
+            tests: [{testCaseId: 1, expectedResult: "1"}],
             testsType: "testCases"
         }
         expect(validateWithTests(data)).toBe(false)

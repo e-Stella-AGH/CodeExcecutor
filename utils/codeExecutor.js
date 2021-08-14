@@ -20,7 +20,6 @@ const _execute = (data, successCallback, errorCallback) => {
         successCallback({
             err: result.stderr,
             result: result.stdout.trim(),
-            expected: data.expectedResult.trim(),
             passed: result.stdout.trim() == data.expectedResult.trim()
         })
     })
