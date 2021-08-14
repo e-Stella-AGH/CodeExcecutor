@@ -1,0 +1,26 @@
+{
+  "name": "codeexcecutor",
+  "version": "1.0.0",
+  "description": "Code executor backend service mainly for E-Stella project",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/e-Stella-AGH/CodeExcecutor.git"
+  },
+  "author": "Malahite Developers",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/e-Stella-AGH/CodeExcecutor/issues"
+  },
+  "homepage": "https://github.com/e-Stella-AGH/CodeExcecutor#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "jest": "^27.0.6"
+  },
+  "devDependencies": {
+    "supertest": "^6.1.5"
+  }
+}
