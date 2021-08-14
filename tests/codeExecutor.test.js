@@ -2,7 +2,7 @@ const {codeExecutor} = require("../utils/codeExecutor")
 
 describe("Code executor should work properly", () => {
 
-    it("should return true, when code is ok", async () => {
+    it("should return true, when code is ok", done => {
         const data = {
             language: 'python',
             code: "inp = input()\n" +
@@ -11,13 +11,14 @@ describe("Code executor should work properly", () => {
             expectedResult: "xd"
         }
 
-        const result = await codeExecutor.execute(data)
-
-        expect(result.passed).toBe(true)
-        expect(result.err).toBeFalsy()
+        codeExecutor.execute(data).then(result => {
+            expect(result.passed).toBe(true)
+            expect(result.err).toBeFalsy()
+            done()
+        })
     })
 
-    it("should return false, if test didn't pass", async () => {
+    it("should return false, if test didn't pass", done => {
         const data = {
             language: 'python',
             code: "inp = input()\n" +
@@ -26,13 +27,14 @@ describe("Code executor should work properly", () => {
             expectedResult: "other xd"
         }
 
-        const result = await codeExecutor.execute(data)
-
-        expect(result.passed).toBe(false)
-        expect(result.err).toBeFalsy()
+        codeExecutor.execute(data).then(result => {
+            expect(result.passed).toBe(false)
+            expect(result.err).toBeFalsy()
+            done()
+        })
     })
 
-    it("should show compilation error, if there's one", async () => {
+    it("should show compilation error, if there's one", done => {
         const data = {
             language: 'python',
             code: "inp = input()\n" +
@@ -41,12 +43,13 @@ describe("Code executor should work properly", () => {
             expectedResult: "other xd"
         }
 
-        const result = await codeExecutor.execute(data)
-
-        expect(result.err).toBeTruthy()
+        codeExecutor.execute(data).then(result => {
+            expect(result.err).toBeTruthy()
+            done()
+        })
     })
 
-    it("should execute more complicated code", async () => {
+    it("should execute more complicated code", done => {
         const data = {
             language: 'python',
             code: "x = input()\n" +
@@ -55,10 +58,11 @@ describe("Code executor should work properly", () => {
             expectedResult: "4"
         }
 
-        const result = await codeExecutor.execute(data)
-
-        expect(result.passed).toBe(true)
-        expect(result.err).toBeFalsy()
+        codeExecutor.execute(data).then(result => {
+            expect(result.passed).toBe(true)
+            expect(result.err).toBeFalsy()
+            done()
+        })
     })
 
 })

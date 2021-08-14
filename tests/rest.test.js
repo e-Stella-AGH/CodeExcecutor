@@ -20,6 +20,7 @@ describe("Tests on rest endpoints", () => {
 
                 done()
             })
+            .catch(err => done())
     })
 
     it("shouldn't pass all tests", done => {
@@ -44,6 +45,7 @@ describe("Tests on rest endpoints", () => {
 
                 done()
             })
+            .catch(err => done())
     })
 
     it("should show compilation errors", done => {
@@ -57,6 +59,7 @@ describe("Tests on rest endpoints", () => {
                 expect(body[0].err).toBeTruthy()
                 done()
             })
+            .catch(err => done())
     })
 
     it("should return bad request with invalid schema", done => {
@@ -68,6 +71,7 @@ describe("Tests on rest endpoints", () => {
                 expect(response.statusCode).toBe(400)
                 done()
             })
+            .catch(err => done())
     })
 
 })
