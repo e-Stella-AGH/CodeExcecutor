@@ -1,5 +1,6 @@
-const app = require('../index')
+const app = require('../app')
 const request = require('supertest')
+const {jestTimeout} = require("../utils/constants");
 
 describe("Tests on rest endpoints", () => {
 
@@ -21,7 +22,7 @@ describe("Tests on rest endpoints", () => {
                 done()
             })
             .catch(err => done())
-    }, 30000)
+    }, jestTimeout)
 
     it("shouldn't pass all tests", done => {
         request(app)
@@ -45,7 +46,7 @@ describe("Tests on rest endpoints", () => {
                 done()
             })
             .catch(err => done())
-    }, 30000)
+    }, jestTimeout)
 
     it("should show compilation errors", done => {
         request(app)
@@ -59,7 +60,7 @@ describe("Tests on rest endpoints", () => {
                 done()
             })
             .catch(err => done())
-    }, 30000)
+    }, jestTimeout)
 
     it("should return bad request with invalid schema", done => {
         request(app)

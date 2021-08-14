@@ -1,11 +1,18 @@
 const { CodeExecutorService } = require('./controllers/CodeExecutorService')
 const express = require('express')
-const bodyParser = require('body-parser')
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
 
 const app = express()
-const port = process.env.port || 8080
 
-app.use(bodyParser.json())
+
+app.use(logger('dev'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
+
 
 app.get("/", (req, res) => {
     res.send("Hello world")
@@ -17,10 +24,6 @@ app.post('/with_tests', (req, res) => {
         .catch(err => {
             res.status(400).send(err.message)
         })
-})
-
-app.listen(port, () => {
-    console.log(`App ready on port ${port}!`)
 })
 
 module.exports = app

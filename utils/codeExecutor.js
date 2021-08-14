@@ -9,12 +9,12 @@ const execute = (data) => {
 
 const _execute = (data, successCallback, errorCallback) => {
 
-    if(!validateCodeSchema(data)) {
+    if (!validateCodeSchema(data)) {
         throw Error("Code schema is wrong!")
     }
 
     paiza_io(data.language, data.code, data.input, (err, result) => {
-        if(err) {
+        if (err) {
             errorCallback(err.message)
         }
         successCallback({

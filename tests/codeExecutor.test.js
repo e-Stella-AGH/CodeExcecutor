@@ -1,8 +1,9 @@
-const {codeExecutor} = require("../utils/codeExecutor")
+const {jestTimeout} = require("../utils/constants");
+const { codeExecutor } = require("../utils/codeExecutor")
 
 describe("Code executor should work properly", () => {
 
-    jest.setTimeout(30000)
+    jest.setTimeout(jestTimeout)
 
     it("should return true, when code is ok", done => {
         const data = {
