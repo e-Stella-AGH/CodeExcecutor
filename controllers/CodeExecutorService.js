@@ -40,10 +40,10 @@ const executeWithTests = async (data) => {
     return data.testsType === 'file' ? executeFromFile(data) : executeFromTests(data);
 }
 
-const CodeExecutorController = {
+const CodeExecutorService = {
     executeWithTests
 }
 
 module.exports = {
-    CodeExecutorController
+    CodeExecutorService: CodeExecutorService
 }

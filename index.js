@@ -1,4 +1,4 @@
-const { CodeExecutorController } = require('./controllers/CodeExecutorController')
+const { CodeExecutorService } = require('./controllers/CodeExecutorService')
 const express = require('express')
 const bodyParser = require('body-parser')
 
@@ -12,7 +12,7 @@ app.get("/", (req, res) => {
 })
 
 app.post('/with_tests', (req, res) => {
-    CodeExecutorController.executeWithTests(req.body)
+    CodeExecutorService.executeWithTests(req.body)
         .then(result => res.send(result))
         .catch(err => {
             res.status(400).send(err.message)
