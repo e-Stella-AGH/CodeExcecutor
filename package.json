@@ -4,8 +4,8 @@
   "description": "Code executor backend service mainly for E-Stella project",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "test": "jest --detectOpenHandles"
+    "start": "node ./bin/www",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -20,11 +20,19 @@
   "dependencies": {
     "ajv": "^8.6.2",
     "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.5",
     "express": "^4.17.1",
     "jest": "^27.0.6",
+    "morgan": "^1.10.0",
     "paiza-io": "^0.2.3"
   },
   "devDependencies": {
     "supertest": "^6.1.5"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ]
   }
 }

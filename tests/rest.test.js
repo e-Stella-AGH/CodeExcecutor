@@ -1,4 +1,4 @@
-const app = require('../index')
+const app = require('../app')
 const request = require('supertest')
 
 describe("Tests on rest endpoints", () => {
@@ -21,7 +21,7 @@ describe("Tests on rest endpoints", () => {
                 done()
             })
             .catch(err => done())
-    })
+    }, 30_000)
 
     it("shouldn't pass all tests", done => {
         request(app)
@@ -30,7 +30,6 @@ describe("Tests on rest endpoints", () => {
             .then(response => {
                 expect(response.statusCode).toBe(200)
                 const body = response.body
-                console.log(body)
                 expect(body[0].passed).toBe(true)
                 expect(body[0].testCaseId).toBe(1)
                 expect(body[0].err).toBeFalsy()
@@ -46,7 +45,7 @@ describe("Tests on rest endpoints", () => {
                 done()
             })
             .catch(err => done())
-    })
+    }, 30_000)
 
     it("should show compilation errors", done => {
         request(app)
@@ -60,14 +59,13 @@ describe("Tests on rest endpoints", () => {
                 done()
             })
             .catch(err => done())
-    })
+    }, 30_000)
 
     it("should return bad request with invalid schema", done => {
         request(app)
             .post('/with_tests')
             .send(invalidSchema)
             .then(response => {
-                console.log(response.statusCode)
                 expect(response.statusCode).toBe(400)
                 done()
             })
