@@ -4,7 +4,8 @@
   "description": "Code executor backend service mainly for E-Stella project",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "start": "node index.js",
+    "test": "jest tests/"
   },
   "repository": {
     "type": "git",
@@ -17,6 +18,8 @@
   },
   "homepage": "https://github.com/e-Stella-AGH/CodeExcecutor#readme",
   "dependencies": {
+    "ajv": "^8.6.2",
+    "body-parser": "^1.19.0",
     "express": "^4.17.1",
     "jest": "^27.0.6"
   },
