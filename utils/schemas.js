@@ -5,14 +5,26 @@ const withTestsSchema = {
     type: 'object',
     properties: {
         code: { type: "string" },
-        language: { type: "string" },
-        testsType: {
-            type: 'string',
-            "enum": ["file", "testCases"]
+        language: { type: "string" }
+    },
+    oneOf: [
+        {
+            properties: {
+                testsType: {"const": "file"},
+                tests: {
+                    type: 'object',
+                    properties: {
+                        fileName: { type: 'string' },
+                        fileBase64: {type: 'string'}
+                    },
+                    required: ["fileName", "fileBase64"]
+                }
+            }
         },
-        tests: {
-            oneOf: [
-                {
+        {
+            properties: {
+                testsType: {"const": "testCases"},
+                tests: {
                     type: 'array',
                     items: {
                         type: 'object',
@@ -32,20 +44,11 @@ const withTestsSchema = {
                         },
                         required: ["testCaseId", "testData"]
                     }
-                },
-                {
-                    type: 'object',
-                    properties: {
-                        fileName: { type: 'string' },
-                        fileBase64: {type: 'string'}
-                    },
-                    required: ["fileName", "fileBase64"]
                 }
-            ]
+            }
         }
-    },
-    required: ["code", "language", "tests", "testsType"],
-    additionalProperties: false
+    ],
+    required: ["code", "language", "tests", "testsType"]
 }
 
 const validateWithTests = (data) => {

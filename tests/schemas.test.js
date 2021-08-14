@@ -68,17 +68,6 @@ describe("should properly validate schemas", () => {
         expect(validateWithTests(data)).toBe(false)
     })
 
-    it("should not validate schema with other properties", () => {
-        const data = {
-            code: "sample code",
-            language: "python",
-            tests: [{testCaseId: 1, testData: {"foo": "bar"}}],
-            some: "garbage",
-            testsType: "testCases"
-        }
-        expect(validateWithTests(data)).toBe(false)
-    })
-
     it("should not validate schema with tests without testCaseId", () => {
         const data = {
             code: "sample code",
@@ -115,6 +104,16 @@ describe("should properly validate schemas", () => {
             language: "python",
             tests: {fileName: 'fileName', fileBase64: 'fileBase64'},
             testsType: "garbage"
+        }
+        expect(validateWithTests(data)).toBe(false)
+    })
+
+    it("shouldn't validate schema with testsType not in agreement with tests", () => {
+        const data = {
+            code: "sample code",
+            language: "python",
+            tests: {fileName: 'fileName', fileBase64: 'fileBase64'},
+            testsType: "testCases"
         }
         expect(validateWithTests(data)).toBe(false)
     })

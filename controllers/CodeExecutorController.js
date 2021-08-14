@@ -4,7 +4,7 @@ const executeFromFile = (data) => {
     return "Holy shit..."
 }
 
-const executeFromTests = () => {
+const executeFromTests = (data) => {
     return "uff"
 }
 
@@ -13,7 +13,6 @@ const executeWithTests = async (data) => {
         console.log(`Data ${data} wasn't valid with 'withTestsSchema'`)
         throw Error("Schema wasn't valid!")
     }
-    console.log(data)
     return typeof data.testsType === 'file' ? executeFromFile(data) : executeFromTests(data);
 }
 
