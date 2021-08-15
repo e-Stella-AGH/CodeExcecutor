@@ -1,4 +1,5 @@
 const { validateWithTests } = require('../schemas/requestSchemas')
+const { validateTestsSchema } = require('../schemas/testsSchema')
 
 describe("should properly validate schemas", () => {
 
@@ -116,6 +117,53 @@ describe("should properly validate schemas", () => {
             testsType: "testCases"
         }
         expect(validateWithTests(data)).toBe(false)
+    })
+
+    it("should validate proper schema for testCases", () => {
+        const data = [
+            {
+                testCaseId: 1,
+                testData: 'xd',
+                expectedResult: 'xd'
+            },
+            {
+                testCaseId: 2,
+                testData: 'xd',
+                expectedResult: 'xd'
+            }
+        ]
+        expect(validateTestsSchema(data)).toBe(true)
+    })
+
+    it("shouldn't validate schema for testCases even if one test is corrupted", () => {
+        const data = [
+            {
+                testCaseId: '1',  // -> testCaseId must be number
+                testData: 'xd',
+                expectedResult: 'xd'
+            },
+            {
+                testCaseId: 2,
+                testData: 'xd',
+                expectedResult: 'xd'
+            }
+        ]
+        expect(validateTestsSchema(data)).toBe(false)
+    })
+
+    it("shouldn't validate schema when there's missing field", () => {
+        const data = [
+            {
+                testCaseId: 1,
+                testData: 'xd',
+                expectedResult: 'xd'
+            },
+            {
+                testCaseId: 2,
+                testData: 'xd'
+            }
+        ]
+        expect(validateTestsSchema(data)).toBe(false)
     })
 
 })

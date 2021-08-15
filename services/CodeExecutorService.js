@@ -1,6 +1,7 @@
 const { validateWithTests } = require('../schemas/requestSchemas')
 const { codeExecutor } = require('../utils/codeExecutor')
 const { Buffer } = require('buffer')
+const { validateTestsSchema } = require('../schemas/testsSchema')
 
 const execute = async (data) => {
     const _data = {
@@ -14,6 +15,7 @@ const execute = async (data) => {
 
 const executeFromFile = async (data) => {
     const tests = JSON.parse(Buffer.from(data.tests.fileBase64, "base64").toString('ascii'))
+    if (!validateTestsSchema(tests)) throw Error("File with tests isn't in agreement with schema!")
     return await executeFromTests({
         ...data,
         tests: tests
