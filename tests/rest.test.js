@@ -62,6 +62,33 @@ describe("Tests on rest endpoints", () => {
             .catch(err => done())
     }, jestTimeout)
 
+    it("should execute tests from proper file", done => {
+        request(app)
+            .post('/with_tests')
+            .send(properFileTest)
+            .expect(200)
+            .then(response => {
+                expect(response.statusCode).toBe(200)
+                const body = response.body
+                expect(body[0].passed).toBe(true)
+                expect(body[1].passed).toBe(true)
+                done()
+            })
+            .catch(err => done())
+    }, jestTimeout)
+
+    it("should return bad request with invalid json file", done => {
+        request(app)
+            .post('/with_tests')
+            .send(invalidJson)
+            .expect(200)
+            .then(response => {
+                expect(response.statusCode).toBe(400)
+                done()
+            })
+            .catch(err => done())
+    })
+
     it("should return bad request with invalid schema", done => {
         request(app)
             .post('/with_tests')
@@ -139,4 +166,24 @@ const invalidSchema = {
         }
     ],
     "testsType": "testCases"
+}
+
+const properFileTest = {
+    "language": "python",
+    "code": "x=input()\nprint(x**2)",
+    "tests": {
+        "fileName": "testcase.txt",
+        "fileBase64": "Ww0KICB7DQogICAgInRlc3RDYXNlSWQiOiAxLA0KICAgICJ0ZXN0RGF0YSI6IDIsDQogICAgImV4cGVjdGVkUmVzdWx0IjogIjQiDQogIH0sDQogIHsNCiAgICAidGVzdENhc2VJZCI6IDIsDQogICAgInRlc3REYXRhIjogNCwNCiAgICAiZXhwZWN0ZWRSZXN1bHQiOiAiMTYiDQogIH0NCl0="
+    },
+    "testsType": "file"
+}
+
+const invalidJson = {
+    "language": "python",
+    "code": "x=input()\nprint(x**2)",
+    "tests": {
+        "fileName": "testcase.txt",
+        "fileBase64": "Ww0KICB7DQogICAgInRlc3RDYXNlSWQiOiAxLA0KICAgICJ0ZXN0RGF0YSI6IDIsDQogICAgImV4cGVjdGVkUmVzdWx0IjogIjQiDQogIH0sDQogIHsNCiAgICAidGVzdENhc2VJZCI6IDIsDQogICAgInRlc3REYXRhIjogNCwNCiAgICAiZXhwZWN0ZWRSZXN1bHQiOiAiMTYiDQogIH0="
+    },
+    "testsType": "file"
 }
