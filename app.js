@@ -1,4 +1,4 @@
-const { CodeExecutorService } = require('./controllers/CodeExecutorService')
+const { CodeExecutorService } = require('./services/CodeExecutorService')
 const express = require('express')
 const path = require('path');
 const cookieParser = require('cookie-parser');

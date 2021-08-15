@@ -1,5 +1,6 @@
 const { validateWithTests } = require('../schemas/requestSchemas')
 const { codeExecutor } = require('../utils/codeExecutor')
+const { Buffer } = require('buffer')
 
 const execute = async (data) => {
     const _data = {
@@ -11,8 +12,12 @@ const execute = async (data) => {
     return await codeExecutor.execute(_data)
 }
 
-const executeFromFile = (data) => {
-    return "Holy shit..."
+const executeFromFile = async (data) => {
+    const tests = JSON.parse(Buffer.from(data.tests.fileBase64, "base64").toString('ascii'))
+    return await executeFromTests({
+        ...data,
+        tests: tests
+    })
 }
 
 const executeFromTests = async (data) => {
@@ -27,8 +32,7 @@ const executeFromTests = async (data) => {
                 ...result,
                 testCaseId: test.testCaseId
             }
-        })
-            .catch(err => err)
+        }).catch(err => err)
     }))
 }
 
