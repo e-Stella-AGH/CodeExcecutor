@@ -23,7 +23,7 @@ const executeFromFile = async (data) => {
 }
 
 const executeFromTests = async (data) => {
-    return await Promise.all(data.tests.map(test => {
+    const res = await Promise.all(data.tests.map(test => {
         return execute({
             language: data.language,
             code: data.code,
@@ -32,10 +32,16 @@ const executeFromTests = async (data) => {
         }).then(result => {
             return {
                 ...result,
-                testCaseId: test.testCaseId
+                testCaseId: test.testCaseId,
             }
         }).catch(err => err)
     }))
+    return {
+        results: JSON.stringify(res),
+        code: data.code,
+        solverId: data.solverId,
+        taskId: data.taskId
+    }
 }
 
 const executeWithTests = async (data) => {

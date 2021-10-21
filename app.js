@@ -4,6 +4,7 @@ const cors = require('cors')
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const {RabbitService} = require("./services/RabbitService");
 
 const app = express()
 
@@ -21,7 +22,10 @@ app.get("/", (req, res) => {
 
 app.post('/with_tests', (req, res) => {
     CodeExecutorService.executeWithTests(req.body)
-        .then(result => res.send(result))
+        .then(result => {
+            RabbitService.sendResults(result)
+            res.status(200).send(JSON.stringify({msg: "Results has been sent"}))
+        })
         .catch(err => {
             res.status(400).send(err.message)
         })

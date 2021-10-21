@@ -19,6 +19,7 @@
   "homepage": "https://github.com/e-Stella-AGH/CodeExcecutor#readme",
   "dependencies": {
     "ajv": "^8.6.2",
+    "amqplib": "^0.8.0",
     "body-parser": "^1.19.0",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
