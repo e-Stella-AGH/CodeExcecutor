@@ -24,7 +24,7 @@ app.post('/with_tests', (req, res) => {
     CodeExecutorService.executeWithTests(req.body)
         .then(result => {
             RabbitService.sendResults(result)
-            res.status(200).send(JSON.stringify({msg: "Results has been sent"}))
+            res.status(200).send(result)
         })
         .catch(err => {
             res.status(400).send(err.message)
