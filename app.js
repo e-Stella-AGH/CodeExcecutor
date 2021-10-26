@@ -23,7 +23,7 @@ app.get("/", (req, res) => {
 app.post('/with_tests', (req, res) => {
     CodeExecutorService.executeWithTests(req.body)
         .then(result => {
-            RabbitService.sendResults(result)
+            RabbitService.sendResults({...result, results: JSON.stringify(result.results)})
             res.status(200).send(result)
         })
         .catch(err => {

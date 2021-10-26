@@ -37,7 +37,7 @@ const executeFromTests = async (data) => {
         }).catch(err => err)
     }))
     return {
-        results: JSON.stringify(res),
+        results: res,
         code: data.code,
         solverId: data.solverId,
         taskId: data.taskId
