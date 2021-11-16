@@ -2,6 +2,8 @@ const amqp_url = process.env.CLOUD_AMQP || "amqp://localhost:5672"
 
 const sendResults = (result) => {
     const amqp = require('amqplib/callback_api')
+    result = {...result, time: JSON.stringify(Date.now())}
+    console.log(result)
     amqp.connect(amqp_url, function (err, connection) {
         if (err)
             throw err
